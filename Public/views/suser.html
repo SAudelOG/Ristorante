@@ -1,0 +1,28 @@
+<form name="logginForm" role="form" ng-submit="logginForm.$valid && clikForm()" novalidate>
+	<div class="form-group col-md-2 col-xs-7">
+		<label class="label-form" for="inputName">Nombre(s)</label>
+		<input type="text" class="form-control" id="inputName" placeholder="Escribe tu nombre" ng-model="Nombre" required>
+	</div>
+	<div class="row visible-xs"></div>
+	<div class="form-group col-md-2 col-xs-8">
+		<label class="label-form" for="inputfirstlastName">Apellido Paterno</label>
+		<input type="text" class="form-control" id="inputfirstlastName" placeholder="Escribe tu apellido paterno">
+	</div>
+	<div class="form-group col-md-2 col-xs-8">
+		<label class="label-form" for="inputsecondlastName">Apellido Materno</label>
+		<input type="text" class="form-control" id="inputsecondlastName" placeholder="Escribe tu apellido materno">
+	</div>
+	<div class="row"></div>
+	<div class="form-group col-md-3 col-xs-8">
+		<label class="label-form" for="inputstreet">Escribe tu domicilio</label>
+		<input type="text" class="form-control" id="inputstreet" placeholder="Escribe tu domicilio">
+	</div>
+	<div class="form-group col-md-3 col-xs-8">
+		<label class="label-form" for="inputphone">Escribe tu telefono</label>
+		<input type="text" class="form-control" id="inputphone" placeholder="escribe tu telefono">
+	</div>	
+	<div class="row"></div>
+	<div class="col-xs-6">
+		<button type="submit" class="btn btn-danger pull-right">Enviar</button>
+	</div>
+</form>

@@ -1,0 +1,54 @@
+<div class="container-fluid">
+	<div class="form">
+		<div class="">
+			<div class="col-md-3">
+				<form name="logginForm" role="form" ng-submit="logginForm.$valid && clikForm()" novalidate>
+					<h1 class="page-header text-center titulo_loggin">
+						Loggin manual
+					</h1>
+					<div >
+						<label class="label-form" for="inputmail">Correo electronio</label>
+						<input type="email" class="form-control" id="inputmail" placeholder="Escribe tu correo electronico">
+					</div>
+					<br>
+					<div>
+						<label class="label-form" for="inputreentermail">Vuelve a escribir tu correo electronico</label>
+						<input type="email" class="form-control" id="inputreentermail" placeholder="Escribe tu correo electronico">
+					</div>
+					<br>
+					<div>
+						<label class="label-form" for="inputpassword">Escribe una contrasena</label>
+						<input type="password" class="form-control" id="inputpassword" placeholder="Escribe tu contrasena">
+					</div>
+					<br>
+					<div class="">
+						<button type="submit" class="btn btn-danger pull-right">Enviar</button>
+					</div>
+					<div class="row"></div>
+				</form>
+			</div>
+			<div class="col-md-3">
+				<h1 class="page-header text-center titulo_loggin">
+					Loggin Social
+				</h1>
+				<div>
+					<a class="btn btn-block btn-social btn-twitter">
+						<i class="fa fa-twitter"></i> Sign in with Google Plus
+					</a>
+				</div>
+				<br>
+				<div>
+					<a class="btn btn-block btn-social btn-google-plus">
+						<i class="fa fa-google-plus"></i> Sign in with Twitter
+					</a>
+				</div>
+				<br>
+				<div>
+					<a class="btn btn-block btn-social btn-facebook">
+						<i class="fa fa-facebook"></i> Sign in with facebook
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
