@@ -1,24 +1,24 @@
 <div class="container-fluid">
 	<div class="form">
 		<div class="">
-			<div class="col-md-3">
+			<div class="col-md-3"> 
 				<form name="logginForm" role="form" ng-submit="logginForm.$valid && clikForm()" novalidate>
 					<h1 class="page-header text-center titulo_loggin">
 						Loggin manual
 					</h1>
 					<div >
 						<label class="label-form" for="inputmail">Correo electronio</label>
-						<input type="email" class="form-control" id="inputmail" placeholder="Escribe tu correo electronico">
+						<input type="email" class="form-control" id="inputmail" placeholder="Escribe tu correo electronico" ng-model="mail">
 					</div>
 					<br>
 					<div>
 						<label class="label-form" for="inputreentermail">Vuelve a escribir tu correo electronico</label>
-						<input type="email" class="form-control" id="inputreentermail" placeholder="Escribe tu correo electronico">
+						<input type="email" class="form-control" id="inputreentermail" placeholder="Escribe tu correo electronico" ng-model="remail">
 					</div>
 					<br>
 					<div>
 						<label class="label-form" for="inputpassword">Escribe una contrasena</label>
-						<input type="password" class="form-control" id="inputpassword" placeholder="Escribe tu contrasena">
+						<input type="password" class="form-control" id="inputpassword" placeholder="Escribe tu contrasena" ng-model="password">
 					</div>
 					<br>
 					<div class="">
@@ -26,6 +26,7 @@
 					</div>
 					<div class="row"></div>
 				</form>
+				<label for="" class="alert alert-danger">{{merror}}</label>
 			</div>
 			<div class="col-md-3">
 				<h1 class="page-header text-center titulo_loggin">

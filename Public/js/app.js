@@ -2,16 +2,13 @@
 	var app = angular.module('Usuarios',[
 		'ngRoute',
 		'ngCookies',
-		'loggin.controllers'
+		'loggin.controllers',
+		'loggin.services'
 	]);
 	
 	app.config(['$routeProvider', function	($routeProvider){
 
 		$routeProvider
-			.when ('/', {
-				templateUrl: 'views/checkStatus.html',
-				controller: 'checStatusController'
-			})
 			.when('/loggin', {
 				templateUrl: 'views/loggin.html',
 				controller: 'logginController'
