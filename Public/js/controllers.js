@@ -1,23 +1,37 @@
 (function (){
 	angular.module('loggin.controllers', [])
 
-	.controller('logginController', ['$scope', '$rootScope', 'logginService', function($scope, $rootScope, logginService){
-		$scope.MiNombre = 'Sergio Audel'
-		$rootScope.title = 'Storantes | Loggin'
-		$scope.Nombre = "";
-
+	.controller('logginController', ['$scope', '$rootScope', 'logginService', '$location', function($scope, $rootScope, logginService, $location){
+		$rootScope.title = 'Storantes | Loggin';
 
 		$scope.clikForm = function (){
-			if ($scope.mail != $scope.remail){
-				$scope.merror = 'tu mail tiene que considir';
-				console.log('Tu mail tiene que considir')
+			var user = {
+				email : $scope.mail,
+				password : $scope.password
+			}
+
+			if (!user.email){
+				$scope.merror = 'Escribe un correo';
+				console.log('Escribe un correo');
+				console.log('No entro');
 			}
 			else {
 				$scope.merror = 'Datos correctos ya estamos casi listos! para ir a la api!';
-				logginService.manualstrategy($scope.mail, $scope.password);
+				logginService.manualstrategy(user)
+					.then(function (result){
+						if (result){
+							$location.url('settings/dashboard')
+						}
+						console.log('user was created: ' + result);
+					});
 			}
+
 		};
 	}])
+	.controller('dashboardController', ['$scope', '$window', function ($scope, $window){
+		$scope.u_id = $window.sessionStorage.u_id;
+	}])
+
 
 	.controller('checStatusController', ['$cookieStore', '$location', function($cookieStore, $location){
 		console.log('we are checking your status......');
