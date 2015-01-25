@@ -1,14 +1,18 @@
 (function (){
+	
+	'use strict';
+
 	angular.module('loggin.controllers', [])
 
 	.controller('logginController', ['$scope', '$rootScope', 'logginService', '$location', function($scope, $rootScope, logginService, $location){
 		$rootScope.title = 'Storantes | Loggin';
+		var user = {};
 
 		$scope.clikForm = function (){
-			var user = {
+	 		user = {
 				email : $scope.mail,
 				password : $scope.password
-			}
+			};
 
 			if (!user.email){
 				$scope.merror = 'Escribe un correo';

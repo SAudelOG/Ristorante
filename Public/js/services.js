@@ -1,4 +1,7 @@
 (function () {
+
+	'use strict';
+
 	angular.module('loggin.services', [])
 
 	.factory('logginService', ['$http', '$q', '$window',  function ($http, $q, $window) {
@@ -6,17 +9,18 @@
 		function manualstrategy (user) {
 			var deferred = $q.defer();
 			var isAutthenticate = false;
+			var credentials = {};
 
 			$http.post('http://nodejs-pizapi.rhcloud.com/users',user)
 				.success(function (data){
 					console.log(data);
-					userRespose = {
+					credentials = {
 							u_id : data.data.id,
 							auth_token : data.data.token
 						};
-
-					$window.sessionStorage.u_id = userRespose.u_id;
-					$window.sessionStorage.auth_token = userRespose.auth_token;
+					console.log({credentials:credentials});	
+					$window.sessionStorage.u_id = credentials.u_id;
+					$window.sessionStorage.auth_token = credentials.auth_token;
 
 					isAutthenticate = true;
 
