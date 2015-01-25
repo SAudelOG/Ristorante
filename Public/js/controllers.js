@@ -21,7 +21,7 @@
 				logginService.manualstrategy(user)
 					.then(function (result){
 						if (result){
-							$location.url('settings/dashboard')
+							$location.path('settings/dashboard')
 						}
 						console.log('user was created: ' + result);
 					});
