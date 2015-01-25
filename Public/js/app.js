@@ -33,25 +33,4 @@
 				redirectTo: 'loggin'
 			});
 	}])
-
-	.factory('authInterceptor',['$rootScope', '$q', '$window', function ($rootScope, $q, $window){
-		return{
-			request: function (config) {
-				config.headers = config.headers || {};
-				if ($window.sessionStorage.auth_token){
-					config.headers.Authorization = $window.sessionStorage.auth_token;
-					console.log('intercepcion!!!');
-				}
-				return config; 
-			},
-			response: function (response) {
-				if (response.status === 401){
-					//when user is not authenticate
-					console.log('intercepcion2')
-				}
-				return response || $q.when(response);
-			}
-		};
-	}]);
-
 })();

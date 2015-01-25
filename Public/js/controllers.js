@@ -1,5 +1,5 @@
 (function (){
-	
+
 	'use strict';
 
 	angular.module('loggin.controllers', [])
@@ -16,11 +16,8 @@
 
 			if (!user.email){
 				$scope.merror = 'Escribe un correo';
-				console.log('Escribe un correo');
-				console.log('No entro');
 			}
 			else {
-				$scope.merror = 'Datos correctos ya estamos casi listos! para ir a la api!';
 				logginService.manualstrategy(user)
 					.then(function (result){
 						if (result){
