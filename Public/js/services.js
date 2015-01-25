@@ -19,8 +19,8 @@
 							auth_token : data.data.token
 						};
 					console.log({credentials:credentials});	
-					$window.sessionStorage.u_id = credentials.u_id;
-					$window.sessionStorage.auth_token = credentials.auth_token;
+					sessionStorage.u_id = credentials.u_id;
+					sessionStorage.auth_token = credentials.auth_token;
 
 					isAutthenticate = true;
 
@@ -46,8 +46,8 @@
 		return{
 			request: function (config) {
 				config.headers = config.headers || {};
-				if ($window.sessionStorage.auth_token){
-					config.headers.Authorization = $window.sessionStorage.auth_token;
+				if (sessionStorage.auth_token){
+					config.headers.Authorization = sessionStorage.auth_token;
 					console.log('authorization token intercepted!');
 				}
 				return config; 
@@ -55,7 +55,7 @@
 			response: function (response) {
 				if (response.status === 401){
 					//when user is not authenticate
-					console.log('intercepcion2')
+					console.log('intercepcion2');
 				}
 				return response || $q.when(response);
 			}

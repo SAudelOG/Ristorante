@@ -8,7 +8,6 @@
 		'loggin.controllers',
 		'loggin.services',
 	]); 
-	
 	app.config(['$routeProvider', '$httpProvider','$locationProvider', function	($routeProvider, $httpProvider, $locationProvider){
 		//to eliminate /# on the hash
 		//$locationProvider.html5Mode({enabled:true, requireBase: false});;
