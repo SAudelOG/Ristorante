@@ -42,13 +42,56 @@
 			manualstrategy:manualstrategy
 		}
 	}])
+	.factory('AuthToken', ['$window', function($window){
+		var tokenkey = 'auth_token';
+		var idkey = 'u_id';
+		var storage = $window.sessionStorage;
+		var cachedToken;
+		var	cachedid;
+
+		function setToken (token) {
+			cachedToken = token;
+			storage.setItem(tokenkey, token);	
+		};
+
+		function setId (u_id) {
+			cachedid = u_id;
+			storage.setItem(idkey, u_id)
+		}
+
+		function getCredentials () {
+			if (!cachedToken){
+				cachedToken = storage.getItem(tokenkey);	
+			}
+			if (!cachedid) {
+				cachedid = storage.getItem(idkey);	
+			}
+			return {credentials: {
+				auth_token: cachedToken,
+				u_id: cachedid
+			}}
+		};
+
+		function clearCredentials () {
+			cachedToken = null;
+			cachedid = null;
+			storage.removeItem(tokenkey);
+			storage.removeItem(idkey);
+		};
+
+		return {
+			setToken: setToken,
+			setId: setId,
+			getCredentials: getCredentials,
+			clearCredentials: clearCredentials
+		};
+	}])
 	.factory('authInterceptor',['$rootScope', '$q', '$window', function ($rootScope, $q, $window){
 		return{
 			request: function (config) {
 				config.headers = config.headers || {};
 				if (sessionStorage.auth_token){
 					config.headers.Authorization = 'Bearer ' + sessionStorage.auth_token;
-					console.log('authorization token intercepted!');
 					console.log(config.headers.Authorization);
 				}
 				return config; 

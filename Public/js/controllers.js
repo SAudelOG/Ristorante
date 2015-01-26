@@ -4,10 +4,11 @@
 
 	angular.module('loggin.controllers', [])
 
-	.controller('logginController', ['$scope', '$rootScope', 'logginService', '$location', function($scope, $rootScope, logginService, $location){
+	.controller('logginController', ['$scope', '$rootScope', 'logginService', '$location', 'AuthToken', function($scope, $rootScope, logginService, $location, AuthToken){
 		$rootScope.title = 'Storantes | Loggin';
 		var user = {};
 
+		console.log(AuthToken.getCredentials())
 		$scope.clikForm = function (){
 	 		user = {
 				email : $scope.mail,
