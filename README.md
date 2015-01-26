@@ -1,7 +1,8 @@
 Ristorante
 ==========
+* npm install 
+* install Grunt 
+* run command grunt
 
-####Use GruntfileJS to run server on por :9001
-
-npm install 
+enjoy :)
 
