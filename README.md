@@ -1,4 +1,7 @@
 Ristorante
 ==========
 
-app that allow pizza owners to manage their restaurants
+####Use GruntfileJS to run server on por :9001
+
+npm install 
+
