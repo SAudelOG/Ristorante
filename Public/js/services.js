@@ -4,14 +4,14 @@
 
 	angular.module('loggin.services', [])
 
-	.factory('logginService', ['$http', '$q', '$window',  function ($http, $q, $window) {
+	.factory('logginService', ['$http', '$q', '$window', 'API_BASE', function ($http, $q, $window, API_BASE) {
 
 		function manualstrategy (user) {
 			var deferred = $q.defer();
 			var isAutthenticate = false;
 			var credentials = {};
 
-			$http.post('http://nodejs-pizapi.rhcloud.com/users',user)
+			$http.post(API_BASE + 'users', user)
 				.success(function (data){
 					console.log(data);
 					credentials = {
@@ -47,8 +47,9 @@
 			request: function (config) {
 				config.headers = config.headers || {};
 				if (sessionStorage.auth_token){
-					config.headers.Authorization = sessionStorage.auth_token;
+					config.headers.Authorization = 'Bearer ' + sessionStorage.auth_token;
 					console.log('authorization token intercepted!');
+					console.log(config.headers.Authorization);
 				}
 				return config; 
 			},

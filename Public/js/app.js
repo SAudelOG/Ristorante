@@ -8,6 +8,8 @@
 		'loggin.controllers',
 		'loggin.services',
 	]); 
+	app.constant('API_BASE', 'http://nodejs-pizapi.rhcloud.com/');
+
 	app.config(['$routeProvider', '$httpProvider','$locationProvider', function	($routeProvider, $httpProvider, $locationProvider){
 		//to eliminate /# on the hash
 		//$locationProvider.html5Mode({enabled:true, requireBase: false});;
