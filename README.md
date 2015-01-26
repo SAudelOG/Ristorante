@@ -1,8 +1,8 @@
 Ristorante
 ==========
-npm install 
-install Grunt 
-run command grunt
+* npm install 
+* install Grunt 
+* run command grunt
 
 enjoy :)
 
