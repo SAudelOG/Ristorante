@@ -7,13 +7,12 @@
 	.factory('logginService', ['$http', '$q', '$window', 'API_BASE', function ($http, $q, $window, API_BASE) {
 
 		function manualstrategy (user) {
-			var deferred = $q.defer();
-			var isAutthenticate = false;
-			var credentials = {};
+			var deferred = $q.defer(),
+				isAutthenticate = false,
+				credentials = {};
 
 			$http.post(API_BASE + 'users', user)
 				.success(function (data){
-					console.log(data);
 					credentials = {
 							u_id : data.data.id,
 							auth_token : data.data.token
