@@ -8,7 +8,7 @@
 		'loggin.controllers',
 		'loggin.services',
 	]); 
-	app.constant('API_BASE', 'http://nodejs-pizapi.rhcloud.com/');
+	app.constant('API_BASE', 'http://127.0.0.1:3000/');
 
 	app.config(['$routeProvider', '$httpProvider','$locationProvider', function	($routeProvider, $httpProvider, $locationProvider){
 		//to eliminate /# on the hash
