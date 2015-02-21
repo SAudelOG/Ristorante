@@ -8,7 +8,6 @@
 		$rootScope.title = 'Storantes | Loggin';
 		var user = {};
 
-		console.log(AuthToken.getCredentials())
 		$scope.clikForm = function (){
 	 		user = {
 				email : $scope.mail,
@@ -20,37 +19,18 @@
 			}
 			else {
 				logginService.manualstrategy(user)
-					.then(function (result){
-						if (result){
+					.then(function (authorized){
+						if (authorized === true){
 							$location.path('settings/dashboard');
 						}
-						console.log('user was created: ' + result);
+						console.log('authorized: ' + authorized);
 					});
 			}
-
 		};
 	}])
 	.controller('dashboardController', ['$scope', '$window', function ($scope, $window){
+		$scope.auth_token = $window.sessionStorage.auth_token;
 		$scope.u_id = $window.sessionStorage.u_id;
 	}])
 
-
-	.controller('checStatusController', ['$cookieStore', '$location', function($cookieStore, $location){
-		console.log('we are checking your status......');
-
-		$cookieStore.put('c_su',12345);
-
-		var pikCookie = $cookieStore.get('c_su');
-
-		console.log('cookie recolectada: ' + pikCookie);
-		if (pikCookie){
-			$location.url('crear-superusuario');
-			console.log($location.absUrl());
-			console.log('abemus cookie');
-		}
-			else{
-				$location.url('login');
-				console.log('NO!!! abemus cookie');
-			}
-	}])
 })();

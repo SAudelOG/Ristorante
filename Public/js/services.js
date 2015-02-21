@@ -59,10 +59,10 @@
 		}
 
 		function getCredentials () {
-			if (!cachedToken){
+			if (cachedToken){
 				cachedToken = storage.getItem(tokenkey);	
 			}
-			if (!cachedid) {
+			if (cachedid) {
 				cachedid = storage.getItem(idkey);	
 			}
 			return {credentials: {

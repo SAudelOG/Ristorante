@@ -6,7 +6,7 @@ body{
   	background-size: cover;
 }
 .titulo_loggin{
-  color: #fff;
+  color: #c0c0c0;
 }
 .icono{
 	font-size: 40px;
@@ -17,7 +17,7 @@ body{
 	background-color: rgba(253, 133, 133, 0.1);*/
 }
 .label-form{
-	color:#fff;
+	color:#c0c0c0;
 }
 .ng-invalid.ng-dirty{
   border-color: rgb(252, 0, 210);
