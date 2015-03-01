@@ -17,7 +17,6 @@
 							u_id : data.data.id,
 							auth_token : data.data.token
 						};
-					console.log({credentials:credentials});	
 					sessionStorage.u_id = credentials.u_id;
 					sessionStorage.auth_token = credentials.auth_token;
 
@@ -91,7 +90,6 @@
 				config.headers = config.headers || {};
 				if (sessionStorage.auth_token){
 					config.headers.Authorization = 'Bearer ' + sessionStorage.auth_token;
-					console.log(config.headers.Authorization);
 				}
 				return config; 
 			},

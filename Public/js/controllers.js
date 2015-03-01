@@ -21,7 +21,7 @@
 				logginService.manualstrategy(user)
 					.then(function (authorized){
 						if (authorized === true){
-							$location.path('settings/dashboard');
+							$location.path('settings');
 						}
 						console.log('authorized: ' + authorized);
 					});

@@ -1,9 +1,12 @@
 body{
-	background: url(../img/F5.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover;
+	
+}
+.loggin-background{
+  background: url(../img/F5.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .titulo_loggin{
   color: #c0c0c0;
