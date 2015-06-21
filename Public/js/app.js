@@ -3,10 +3,11 @@
 	'use strict';
 
 	var app = angular.module('Usuarios',[
+		'ngMaterial',
 		'ngRoute',
 		'ngCookies',
 		'loggin.controllers',
-		'loggin.services',
+		'loggin.services'
 	]); 
 	app.constant('API_BASE', 'http://nodejs-pizapi.rhcloud.com/');
 
@@ -21,7 +22,8 @@
 				controller: 'logginController'
 			})
 			.when('/settings', {
-				templateUrl : 'views/settings.html',
+				templateUrl : 'views/settings-materialDesign.html',
+				controller : 'AppCtrl'
 			})
 			.when('/settings/dashboard', {
 				templateUrl : 'views/dashboard.html',

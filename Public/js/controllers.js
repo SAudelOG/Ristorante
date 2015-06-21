@@ -32,5 +32,16 @@
 		$scope.auth_token = $window.sessionStorage.auth_token;
 		$scope.u_id = $window.sessionStorage.u_id;
 	}])
+	.controller('AppCtrl', ['$scope', '$mdSidenav','$mdBottomSheet', '$mdDialog', function ($scope,$mdSidenav,$mdBottomSheet, $mdDialog){
+		$scope.toggleSidenav = function(menuId) {
+	    $mdSidenav(menuId).toggle();
+  		};
+  		var saludo = 'jejeje soy un hacker';
+  		$scope.openBottomSheet = function() {
+		 $mdBottomSheet.show({
+	      	template: '<md-bottom-sheet>' + saludo + '</md-bottom-sheet>'
+    	});
+  		};
+	}])
 
 })();
