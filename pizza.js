@@ -24,9 +24,13 @@
 	app.use(express.static(__dirname + '/public'));
 
 	app.get('/', function(req, res){
-		res.json({
-			Status:'OK'
-		});
+		res.render('home');
+	});
+
+	//handle 404 err
+	app.use(function(req, res){
+		res.status(404);
+		res.render('404')
 	});
 
 	app.listen(app.get('port'), function(){
