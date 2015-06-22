@@ -3,12 +3,12 @@
 
 # TEAM
 
-    <Sergio Ortiz> -- <FrontEnd> -- <@SaudelOG>
-    <Alonso Valdovinos> -- <BackEnd> -- <Twitter>
+    <Sergio Ortiz> -- <Full stack developer> -- <@SaudelOG>
+    <Alonso Valdovinos> -- <Full stack developer> -- <Twitter>
 
 # THANKS
 
-    <name>
+    <Ninos pizza>
 
 # TECHNOLOGY COLOPHON
 
