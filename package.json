@@ -9,8 +9,10 @@
   "author": "Minisis <contacto@Minisis>",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^3.0.0",
     "grunt": "^0.4.5",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "mocha": "^2.2.5"
   },
   "dependencies": {
     "express": "^4.13.0",
