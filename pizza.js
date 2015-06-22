@@ -40,7 +40,9 @@
 		res.render('login');
 	});
 
-
+	app.get('/dashboard', function(req, res){
+		res.render('dashboard/home');
+	});
 
 	//Handle 404 err
 	app.use(function(req, res){
