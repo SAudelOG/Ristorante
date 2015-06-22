@@ -27,6 +27,9 @@
 		res.render('home');
 	});
 
+	app.get('/login',function(req, res){
+		res.render('login');
+	});
 	//handle 404 err
 	app.use(function(req, res){
 		res.status(404);
