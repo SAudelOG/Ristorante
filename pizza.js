@@ -40,7 +40,9 @@
 		res.render('login');
 	});
 
-	//handle 404 err
+
+
+	//Handle 404 err
 	app.use(function(req, res){
 		res.status(404);
 		res.render('404');
