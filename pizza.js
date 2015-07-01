@@ -45,6 +45,14 @@
 		next();
 	});
 
+	//Middleware to see evidence how workers
+	//handle diferent request
+	app.use(function(req, res, next){
+		var cluster = require('cluster');
+		if (cluster.isWorker) console.log('Worker %d recived request', cluster.worker.id);
+		next();
+	});
+
 	app.get('/', function(req, res){
 		res.render('home',{
 			pageTestScript:'/qa/tests-home.js'
