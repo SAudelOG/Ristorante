@@ -14,7 +14,7 @@ if (cluster.isMaster){
   //should then exit, so we´ll wait the exit event to spawn
   //a new worker to replace it
   cluster.on('disconnect', function(worker){
-    console.log('CLUSTER: worker %d disconnected from the cluste.',
+    console.log('CLUSTER: worker %d disconnected from the cluster.',
       worker.id);
   });
 
