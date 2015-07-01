@@ -20,6 +20,7 @@
     "express": "^4.13.0",
     "express-handlebars": "^2.0.1",
     "express-logger": "0.0.3",
+    "loadtest": "^1.2.11",
     "morgan": "^1.6.0"
   }
 }
