@@ -6,20 +6,6 @@
 
 	var app = express();
 
-	//logging
-	switch(app.get('env')){
-		case 'development':
-			// compact, colorful dev logging
-			app.use(require('morgan')('dev'));
-			break;
-		case 'production':
-			// module 'express-logger' supports daily log rotation
-			app.use(require('express-logger')({
-				path: __dirname + '/log/requests.log'
-			}));
-			break;
-	}
-
 	//Set view engine Handelbars
 	var handlebars = require('express-handlebars').create({
 		defaultLayout: 'main',
@@ -35,6 +21,61 @@
 	app.set('view engine', 'handlebars');
 
 	app.set('port', process.env.PORT || 3000);
+
+	//use domains for better error handling
+	app.use(function(req, res, next){
+		//Create a domain for this request
+		var domain = require('domain').create();
+		//Handle errors on this domain
+		domain.on('error',function(err){
+			console.error('DOMAIN ERROR CAUGHT\n', err.stack);
+			try{
+				//failsafe shutdown in 5 seconds
+				setTimeout(function(){
+					console.error('Failsafe shutdown.');
+					process.exit(1);
+				},5000);
+
+				//Disconnect form the cluster
+				var worker = require('cluster').worker;
+				if(worker) worker.disconnect();
+				//Stop taking new request
+				server.close();
+				try{
+					//Attempt to use Exprees error route
+					next(err);
+				} catch(error){
+					//if Express error route failed, try
+					//plain Node response
+					console.error('Express error mechanism faild. \n', error.stack);
+					res.statusCode = 500;
+					res.setHeader('content-type', 'text/plain');
+					res.end('Server error.');
+				}
+			} catch(error){
+				console.error('Unable to send 500 response.\n', error.stack);
+			}
+		});
+		//add the request and response objects to the domain
+		domain.add(req);
+		domain.add(res);
+		// execute the rest of the request chain in the domain
+		domain.run(next);
+	});
+
+	//logging
+	switch(app.get('env')){
+		case 'development':
+			// compact, colorful dev logging
+			app.use(require('morgan')('dev'));
+			break;
+		case 'production':
+			// module 'express-logger' supports daily log rotation
+			app.use(require('express-logger')({
+				path: __dirname + '/log/requests.log'
+			}));
+			break;
+	}
 
 	app.use(express.static(__dirname + '/public'));
 
@@ -86,7 +127,7 @@
 	//Handle 500 err
 	app.use(function(err, req, res, next){
 		console.error(err.stack);
-		res.render('500')
+		res.render('500');
 	});
 
 	function startServer(){
