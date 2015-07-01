@@ -67,10 +67,20 @@
 		res.render('dashboard/home');
 	});
 
+	app.get('/epic-fail', function(req, res){
+		throw new Error('Nope!');
+	});
+
 	//Handle 404 err
 	app.use(function(req, res){
 		res.status(404);
 		res.render('404');
+	});
+
+	//Handle 500 err
+	app.use(function(err, req, res, next){
+		console.error(err.stack);
+		res.render('500')
 	});
 
 	function startServer(){
