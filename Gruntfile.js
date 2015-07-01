@@ -29,7 +29,7 @@ module.exports = function (grunt) {
       }
     },
     jshint:{
-      app:['pizza.js', './Public/js/main.js'],
+      app:['pizza.js','pizza_cluster.js', './Public/js/main.js'],
       qa:['Gruntfile.js', './Public/qa/**/*.js', './qa/**/*.js']
     }
   });
