@@ -65,9 +65,21 @@
 		res.render('404');
 	});
 
-	http.createServer(app).listen(app.get('port'),function(){
-		console.log('Express starded in ' + app.get('env') +
-		' mode on http://localhost: ' + app.get('port') +
-		'; press Ctrl-C to terminate.');
-	});
+	function startServer(){
+		http.createServer(app).listen(app.get('port'),function(){
+			console.log('Express starded in ' + app.get('env') +
+			' mode on http://localhost: ' + app.get('port') +
+			'; press Ctrl-C to terminate.');
+		});
+	}
+
+	if (require.main === module){
+		// application run directly; start app server
+		startServer();
+	} else{
+		// Application imported as a module via "require": export function
+		// to create server
+		module.exports = startServer;
+	}
+
 })();
