@@ -1,7 +1,8 @@
 (function(){
 	'use strict';
 
-	var express = require('express');
+	var express = require('express'),
+			http = require('http');
 
 	var app = express();
 
@@ -50,7 +51,9 @@
 		res.render('404');
 	});
 
-	app.listen(app.get('port'), function(){
-		console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate');
+	http.createServer(app).listen(app.get('port'),function(){
+		console.log('Express starded in ' + app.get('env') +
+		' mode on http://localhost: ' + app.get('port') +
+		'; press Ctrl-C to terminate.');
 	});
 })();
