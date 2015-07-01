@@ -37,5 +37,5 @@ module.exports = function (grunt) {
   //Resgister Tasks
   grunt.registerTask('default', ['cafemocha', 'jshint']);
 
-  runt.registerTask('watch', ['watch']);
+  grunt.registerTask('watch', ['watch']);
 };
