@@ -67,8 +67,14 @@
 		res.render('dashboard/home');
 	});
 
-	app.get('/epic-fail', function(req, res){
+	app.get('/fail', function(req, res){
 		throw new Error('Nope!');
+	});
+
+	app.get('/epic-fail',function(req, res){
+		process.nextTick(function(){
+			throw new Error('Kaboom!');
+		});
 	});
 
 	//Handle 404 err
