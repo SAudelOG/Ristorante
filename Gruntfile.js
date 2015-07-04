@@ -29,7 +29,7 @@ module.exports = function (grunt) {
       }
     },
     jshint:{
-      app:['pizza.js','pizza_cluster.js', './Public/js/main.js'],
+      app:['pizza.js','pizza_cluster.js', 'credentials.js', './Public/js/main.js','./models/user.js'],
       qa:['Gruntfile.js', './Public/qa/**/*.js', './qa/**/*.js']
     }
   });
@@ -38,4 +38,5 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['cafemocha', 'jshint']);
 
   grunt.registerTask('watch', ['watch']);
+  
 };
