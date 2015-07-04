@@ -17,11 +17,13 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "connect": "^2.30.0",
     "express": "^4.13.0",
     "express-handlebars": "^2.0.1",
     "express-logger": "0.0.3",
     "loadtest": "^1.2.11",
     "mongoose": "^4.0.6",
-    "morgan": "^1.6.0"
+    "morgan": "^1.6.0",
+    "session-mongoose": "^0.5.2"
   }
 }
