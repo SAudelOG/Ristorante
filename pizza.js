@@ -6,6 +6,8 @@
 
 	var app = express();
 
+	var credentials = require('./credentials.js');
+
 	//Set view engine Handelbars
 	var handlebars = require('express-handlebars').create({
 		defaultLayout: 'main',
@@ -79,6 +81,51 @@
 
 	app.use(express.static(__dirname + '/public'));
 
+	// database configuration
+	var mongoose = require('mongoose');
+	var options = {
+		server:{
+			socketOptions:{keepAlive:1}
+		}
+	};
+	switch(app.get('env')){
+		case 'development':
+			mongoose.connect(credentials.mongo.development.connectionString, options);
+			break;
+		case 'production':
+			mongoose.connect(credentials.mongo.production.connectionString, options);
+			break;
+		default:
+			throw new Error('Unknown execution enviroment: ' + app.get('env'));
+	}
+
+	var User = require('./models/user.js');
+
+	User.find(function(err, users){
+		if(users.length) return;
+
+		new User({
+			firstName:'Sergio Audel',
+			lastName:'Ortiz',
+			email:'audel91@gmail.com',
+			isActive:false
+		}).save();
+
+		new User({
+			firstName:'Fernando David',
+			lastName:'Ortiz',
+			email:'fdog@gmail.com',
+			isActive:true
+		}).save();
+
+		new User({
+			firstName:'Jorge Saul',
+			lastName:'Ortiz',
+			email:'bloke@gmail.com',
+			isActive:true
+		}).save();
+	});
+
 	//Middleware to Test app
 	app.use(function(req, res, next){
 		res.locals.showTests = app.get('env') != 'production' &&
@@ -106,6 +153,22 @@
 
 	app.get('/dashboard', function(req, res){
 		res.render('dashboard/home');
+	});
+
+	app.get('/users', function(req, res){
+		User.find({isActive:true},function(err, users){
+			var context = {
+				users : users.map(function(user){
+					return {
+						firstName:user.firstName,
+						lastName:user.lastName,
+						email:user.email
+					};
+				})
+			};
+			res.render('users',context);
+			console.log(context);
+		});
 	});
 
 	app.get('/fail', function(req, res){

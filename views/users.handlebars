@@ -1,0 +1,17 @@
+<h1>Users registered</h1>
+{{#each users}}
+  <div class="user">
+    <h3>
+      {{firstName}} {{lastName}}
+    </h3>
+    {{#if email}}
+      <p>
+        {{email}}
+      </p>
+    {{else}}
+      <p>
+        Falta su email
+      </p>
+      {{/if}}
+  </div>
+{{/each}}
