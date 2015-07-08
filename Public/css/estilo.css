@@ -1,0 +1,10 @@
+body{
+  background-color: #EFEFEF;
+}
+a.lenguage{
+  text-decoration: none;
+}
+.lenguage.selected{
+  font-weight: bold;
+  font-size: 150%;
+}

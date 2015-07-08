@@ -126,6 +126,12 @@
 		}).save();
 	});
 
+	var MongoSessionStore = require('session-mongoose')(require('connect'));
+	var sessionStore = new MongoSessionStore({url: credentials.mongo.development.connectionString});
+
+	app.use(require('cookie-parser')(credentials.cookieSecret));
+	app.use(require('express-session')({store:sessionStore}));
+
 	//Middleware to Test app
 	app.use(function(req, res, next){
 		res.locals.showTests = app.get('env') != 'production' &&
@@ -142,9 +148,22 @@
 	});
 
 	app.get('/', function(req, res){
-		res.render('home',{
-			pageTestScript:'/qa/tests-home.js'
-		});
+		var lenguage = req.session.lenguage || 'ES';
+		console.log(lenguage);
+		var context = {
+			pageTestScrpt:'/qa/tests-home.js',
+			lenguage:lenguage
+		}
+		switch(lenguage){
+			case 'ES': context.lenguageES = 'selected'; break;
+			case 'EN': context.lenguageEN = 'selected'; break;
+		}
+		res.render('home',context)
+	});
+
+	app.get('/set-lenguage/:lenguage',function(req, res){
+		req.session.lenguage = req.params.lenguage;
+		return res.redirect(303, '/');
 	});
 
 	app.get('/login',function(req, res){
@@ -155,6 +174,7 @@
 		res.render('dashboard/home');
 	});
 
+ 	//Retraving data from MongoLab and Display it on user view
 	app.get('/users', function(req, res){
 		User.find({isActive:true},function(err, users){
 			var context = {
