@@ -1,12 +1,16 @@
-<form class="" action="/createAcc" method="post">
+<form id="formCreateAcc" class="" action="/createAcc" method="post">
 	<h2>Crea una cuenta</h2>
 	<div class="nameBox">
 		<label for="nameField">Nombre:</label>
-		<input type="text" id="nameField" name="name" placeholder="Escribe tu nombre">
+		<input type="text" id="nameField" name="name" placeholder="Escribe tu nombre" required>
+	</div>
+	<div class="lastBox">
+		<label for="lastField">Apellido:</label>
+		<input type="text" id="lastField" name="last" placeholder="Escribe tu apellido" required>
 	</div>
 	<div class="emailBox">
 		<label for="emailField">Email:</label>
-		<input type="text" id="emailField" name="email" placeholder="Escribe tu email">
+		<input type="email" id="emailField" name="email" placeholder="Escribe tu email" required>
 	</div>
 	<button type="submit" id="btnCreateAcc">Crear</button>
 </form>
@@ -54,3 +58,23 @@
 		</div>
 	</div>
 </div>
+{{!Test: XHR post}}
+{{! {{#section 'jquery'}}
+{{! <script type="text/javascript">
+	$('document').ready(function(){
+		var url = '/createAcc';
+		data = {name:'sergio', email:'ejemplo'};
+		$('#btnCreateAcc').on('click',function(evt){
+			evt.preventDefault();
+			$.ajax({
+				type:'POST',
+				url: url,
+				data: data,
+				success: function(result){
+					console.log(result);
+				}
+			})
+		});
+	});
+</script> }}
+{{! {{/section}}

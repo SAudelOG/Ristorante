@@ -29,7 +29,9 @@
             error tipo {{flash.type}} {{flash.intro}} {{flash.message}}
       		</div>
       	{{/if}}
-        
+        {{#if user}}
+          <span>Usuario <strong>{{user}}</strong></span>
+        {{/if}}
         {{{body}}}
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

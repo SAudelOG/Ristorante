@@ -103,7 +103,7 @@
 
 	var User = require('./models/user.js');
 
-	User.find(function(err, users){
+	/*User.find(function(err, users){
 		if(users.length) return;
 
 		new User({
@@ -126,7 +126,7 @@
 			email:'bloke@gmail.com',
 			isActive:true
 		}).save();
-	});
+	});*/
 
 	var MongoSessionStore = require('session-mongoose')(require('connect'));
 	var sessionStore = new MongoSessionStore({url: credentials.mongo.development.connectionString});
@@ -160,16 +160,18 @@
 
 	app.get('/', function(req, res){
 		var lenguage = req.session.lenguage || 'ES';
-		console.log(lenguage);
+		var user = req.session.user || '';
+
 		var context = {
 			pageTestScrpt:'/qa/tests-home.js',
-			lenguage:lenguage
-		}
+			lenguage:lenguage,
+			user:user
+		};
 		switch(lenguage){
 			case 'ES': context.lenguageES = 'selected'; break;
 			case 'EN': context.lenguageEN = 'selected'; break;
 		}
-		res.render('home',context)
+		res.render('home',context);
 	});
 
 	app.get('/set-lenguage/:lenguage',function(req, res){
@@ -189,19 +191,42 @@
 	var VALID_EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 	app.post('/createAcc', function(req, res){
-		var name = req.body.name || '', email = req.body.email || '';
+		var name = req.body.name || '',
+				last = req.body.last || '',
+				email = req.body.email || '';
 		//input validation
 		if(!email.match(VALID_EMAIL_REGEX)){
+			//if req was through Ajax and there was a problem
+			//then response in json format
 			if(req.xhr) return res.json({
-											error: 'Invalid email addres'
+											error: 'Invalid email address'
 			});
 			req.session.flash = {
 				type:'danger',
-				intro:'Validationssss',
-				message:'Testing messages flash errors'
-			}
-			return res.redirect(303, '/login')
+				intro:'Warning!',
+				message:'Invalid email address'
+			};
+			return res.redirect(303, '/login');
 		}
+		//if email is correct save user
+		new User({
+			firstName: name,
+			lastName: last,
+			email: email,
+			isActive: true //always "Active" on create Acc
+		}).save(function(err){
+			if(req.xhr) return res.json({
+											error: 'Database connection error'
+			});
+			req.session.flash = {
+				type: 'danger',
+				intro: 'Error',
+				message: 'something went wrong please try again or contac the admin'
+			};
+			return(303, '/login');
+		});
+		req.session.user = name;
+		return res.redirect(303, '/users');
 	});
 
 	app.get('/dashboard', function(req, res){
